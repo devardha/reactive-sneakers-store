@@ -8,7 +8,7 @@ const Button = (props)=> {
 }
 
 const ButtonStyled = Styled.button`
-    background-color:#f5f5f5;
+    background-color:#f6f6f6;
     padding: .75rem 1.5rem;
     border-radius:4px;
     border:1px solid #eee;

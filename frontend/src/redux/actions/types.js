@@ -1,1 +1,3 @@
-export const FETCH_POSTS = 'FETCH_POSTS' 
+export const FETCH_POSTS = 'FETCH_POSTS'
+export const SORTBY_PRICE_LOW = 'SORTBY_PRICE_LOW'
+export const SORTBY_PRICE_HIGH = 'SORTBY_PRICE_HIGH'

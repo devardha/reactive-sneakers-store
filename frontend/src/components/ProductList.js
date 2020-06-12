@@ -9,12 +9,21 @@ class ProductList extends Component{
         this.props.fetchPosts();
     }
 
-    
     render(){
 
         const data = this.props.posts
+        const sortby = this.props.sortby
 
-        function compare( a, b ) {
+        function sortByPriceHigh( a, b ) {
+            if ( a.price < b.price ){
+              return 1;
+            }
+            if ( a.price > b.price ){
+              return -1;
+            }
+            return 0;
+        }
+        function sortByPriceLow( a, b ) {
             if ( a.price < b.price ){
               return -1;
             }
@@ -23,8 +32,25 @@ class ProductList extends Component{
             }
             return 0;
         }
-          
-        const sorted = data.sort( compare );
+
+        // Sort Conditioning
+        function sorting(e){
+            let result;
+
+            if(e === 'PRICE_HIGH'){
+                result = sortByPriceHigh;
+            }
+            else if(e === 'PRICE_LOW'){
+                result = sortByPriceLow;
+            }
+            else{
+                result = sortByPriceLow;
+            }
+
+            return result;
+        }
+
+        const sorted = data.sort( sorting(sortby) );
 
         return(
             <ProductListStyled>
@@ -93,7 +119,8 @@ const ProductListStyled = Styled.div`
 `
 
 const mapStateToProps = state => ({
-    posts: state.posts.items
+    posts: state.posts.items,
+    sortby: state.sortby.sortby
 })
 
 export default connect(mapStateToProps, { fetchPosts })(ProductList);

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Styled from '@emotion/styled'
 import Button from './Button'
+import { connect } from 'react-redux'
+import { sortByPriceLow, sortByPriceHigh } from '../redux/actions/sortActions'
 
-const ContentHeader = () => {
+const ContentHeader = (props) => {
 
     const [ open, setOpen ] = useState(false);
 
@@ -17,8 +19,8 @@ const ContentHeader = () => {
                         <ul>
                             <li value="Featured">Featured</li>
                             <li value="Newest">Newest</li>
-                            <li value="High-Low">Price: High-Low</li>
-                            <li value="Low-High">Price: Low-High</li>
+                            <li value="priceHigh" onClick={props.priceHigh}>Price: High-Low</li>
+                            <li value="priceLow" onClick={props.priceLow}>Price: Low-High</li>
                         </ul>
                     </div>
                     : ''
@@ -27,6 +29,19 @@ const ContentHeader = () => {
         </ContentHeaderStyled>
     )
 }
+
+const mapStateToProps = (state => {
+    return {
+        sortby: state.sortby.sortby,
+    };
+});
+
+const mapDispatchToProps = dispatch => ({
+    priceLow: () => dispatch(sortByPriceLow()),
+    priceHigh: () => dispatch(sortByPriceHigh()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps )(ContentHeader);
 
 const ContentHeaderStyled = Styled.div`
     display:flex;
@@ -66,5 +81,3 @@ const ContentHeaderStyled = Styled.div`
     }
 
 `
-
-export default ContentHeader;
