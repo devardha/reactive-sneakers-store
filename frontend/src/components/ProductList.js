@@ -33,6 +33,15 @@ class ProductList extends Component{
             }
             return 0;
         }
+        function sortByLatest( a, b ) {
+            if ( a.date < b.date ){
+              return -1;
+            }
+            if ( a.date > b.date ){
+              return 1;
+            }
+            return 0;
+        }
 
         // Sort Conditioning
         function sorting(e){
@@ -43,6 +52,9 @@ class ProductList extends Component{
             }
             else if(e === 'PRICE_LOW'){
                 result = sortByPriceLow;
+            }
+            else if(e === 'LATEST'){
+                result = sortByLatest;
             }
             else{
                 result = sortByPriceLow;

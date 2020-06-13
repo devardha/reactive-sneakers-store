@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Styled from '@emotion/styled'
 import Button from './Button'
 import { connect } from 'react-redux'
-import { sortByPriceLow, sortByPriceHigh } from '../redux/actions/sortActions'
+import { sortByPriceLow, sortByPriceHigh, sortByLatest } from '../redux/actions/sortActions'
 import { Link } from 'react-router-dom'
 
 const ContentHeader = (props) => {
@@ -58,7 +58,7 @@ const ContentHeader = (props) => {
                     <div className="sort-menu">
                         <ul>
                             <li value="Featured">Featured</li>
-                            <li value="Newest">Newest</li>
+                            <li value="Newest" onClick={props.latest}>Newest</li>
                             <li value="priceHigh" onClick={props.priceHigh}>Price: High-Low</li>
                             <li value="priceLow" onClick={props.priceLow}>Price: Low-High</li>
                         </ul>
@@ -81,6 +81,7 @@ const mapStateToProps = (state => {
 const mapDispatchToProps = dispatch => ({
     priceLow: () => dispatch(sortByPriceLow()),
     priceHigh: () => dispatch(sortByPriceHigh()),
+    latest: () => dispatch(sortByLatest())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps )(ContentHeader);
