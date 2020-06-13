@@ -4,13 +4,14 @@ import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 //Page Component
-import Home from './pages/Home'
+  import Home from './pages/Home'
 import Mens from './pages/Mens'
 
 //Shared Component
 import Navbar from './components/Navbar'
 
 import store from './redux/store'
+import WomenShoes from './pages/WomenShoes';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/mens" exact component={Mens}/>
+            <Route path="/womens" exact component={WomenShoes}/>
         </Switch>
       </Router>
       <style>{`
@@ -30,7 +32,7 @@ function App() {
       .header{
         position:sticky;
         top:0;
-        z-index:1;
+        z-index:2;
       }
   
       `}</style>

@@ -3,18 +3,18 @@ import Styled from '@emotion/styled'
 import ContentHeader from '../components/ContentHeader'
 import ProductList from '../components/ProductList'
 
-const Mens = ()=> {
+const WomenShoes = ()=> {
     return(
-        <MensStyled>
+        <WomenShoestyled>
             <div className="container">
-                <ContentHeader gender={'MEN'} sort={true}/>
-                <ProductList gender={'MEN'}/>
+                <ContentHeader gender={'WOMEN'} sort={true}/>
+                <ProductList gender={'WOMEN'}/>
             </div>
-        </MensStyled>
+        </WomenShoestyled>
     )
 }
 
-const MensStyled = Styled.div`
+const WomenShoestyled = Styled.div`
     .container{
         display:flex;
         flex-direction:column;
@@ -22,4 +22,4 @@ const MensStyled = Styled.div`
     }
 `
 
-export default Mens;
+export default WomenShoes;

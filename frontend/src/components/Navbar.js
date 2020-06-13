@@ -12,7 +12,7 @@ const Navbar = ()=> {
             <ul className="nav-links">
                 <Link to="/"><li>Home</li></Link>
                 <Link to="/mens"><li>Mens</li></Link>
-                <Link to="/"><li>Womens</li></Link>
+                <Link to="/womens"><li>Womens</li></Link>
                 <Link to="/"><li>Outwear</li></Link>
                 <Link to="/"><li>Blog</li></Link>
             </ul>
@@ -71,7 +71,7 @@ const NavbarStyled = Styled.header`
                 width:100%;
                 height:2px;
                 background-color:#111;
-                bottom:-13px;
+                bottom:-14px;
                 position:absolute;
             }
             }

@@ -3,14 +3,54 @@ import Styled from '@emotion/styled'
 import Button from './Button'
 import { connect } from 'react-redux'
 import { sortByPriceLow, sortByPriceHigh } from '../redux/actions/sortActions'
+import { Link } from 'react-router-dom'
 
 const ContentHeader = (props) => {
 
     const [ open, setOpen ] = useState(false);
+    const gender = props.gender;
+
+    function label(e){
+        let result;
+
+        if(e === 'MEN'){
+            result = "Men's"
+        }
+        else if(e === 'WOMEN'){
+            result = "Women's"
+        }
+        else{
+            result = ''
+        }
+
+        return result;
+    }
+
+    function showmore(e){
+        let result;
+
+        if(e === 'MEN'){
+            result = "/mens"
+        }
+        else if(e === 'WOMEN'){
+            result = "/womens"
+        }
+        else{
+            result = '/'
+        }
+
+        return result;
+    }
+
+    const sorting = props.sort;
 
     return(
         <ContentHeaderStyled>
-            <Button className="sort" onClick={() => setOpen(!open)}>
+            <Link to={showmore(gender)}><h2>{label(gender)} Sneakers</h2></Link>
+            {
+                sorting
+                ?
+                <Button className="sort" onClick={() => setOpen(!open)}>
                 Sort
                 {
                     open
@@ -26,6 +66,8 @@ const ContentHeader = (props) => {
                     : ''
                 }
             </Button>
+                : ''
+            }
         </ContentHeaderStyled>
     )
 }
@@ -45,10 +87,15 @@ export default connect(mapStateToProps, mapDispatchToProps )(ContentHeader);
 
 const ContentHeaderStyled = Styled.div`
     display:flex;
-    margin-bottom:2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
     position:relative;
+    align-items:center;
     font-size:1.2rem;
 
+    h2{
+        font-size:1.5rem;
+    }
     .sort{
         margin-left:auto;
 

@@ -52,17 +52,55 @@ class ProductList extends Component{
 
         const sorted = data.sort( sorting(sortby) );
 
+        const {gender} = this.props;
+
+        // Filtering Men/Women
+        function filtering(e){
+            let result;
+
+            if(e === 'MEN'){
+                result = sorted.filter(function (item){
+                    return item.category.includes('Men');
+                })
+            }
+            else if(e === 'WOMEN'){
+                result = sorted.filter(function (item){
+                    return item.category.includes('Women');
+                })
+            }
+            else{
+                result = sorted.filter(function (item){
+                    return item.category.includes('');
+                })
+            }
+
+            return result;
+        }
+
+        function limitItem(e){
+            let result;
+
+            if(e){
+                result = 4
+            }
+            else{
+                result = undefined
+            }
+
+            return result;
+        }
+
         return(
             <ProductListStyled>
                 <ul className="grid-wrap">
                     {
-                        sorted.map((product, index) => {
+                        filtering(gender).slice(0, limitItem(this.props.limit)).map((product, index) => {
                             return(
                                 <li key={index}>
                                     <img src={product.photo} alt="product"/>
                                     <div className="product-details">
                                         <a href="/" className="product-name">{product.product_name}</a>
-                                        <span className="product-category">{product.category}</span>
+                                        <span className="product-category">{product.category[0]}</span>
                                         <span className="product-price">${product.price}</span>
                                     </div>
                                 </li>
