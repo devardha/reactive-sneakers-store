@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Styled from '@emotion/styled'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../redux/actions/postActions'
+import { Link } from "react-router-dom";
 
 class ProductList extends Component{
 
@@ -99,7 +100,7 @@ class ProductList extends Component{
                                 <li key={index}>
                                     <img src={product.photo} alt="product"/>
                                     <div className="product-details">
-                                        <a href="/" className="product-name">{product.product_name}</a>
+                                        <Link to={`/product/${product.slug}`} className="product-name">{product.product_name}</Link>
                                         <span className="product-category">{product.category[0]}</span>
                                         <span className="product-price">${product.price}</span>
                                     </div>

@@ -21,4 +21,4 @@ app.use('/api/products', productsRouter);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, ()=> console.log(`Server r10unning on port ${PORT}`))
+app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
