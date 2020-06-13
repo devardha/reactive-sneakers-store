@@ -13,6 +13,7 @@ import Navbar from './components/Navbar'
 import store from './redux/store'
 import WomenShoes from './pages/WomenShoes';
 import Product from './pages/Product';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" exact component={Home}/>
             <Route path="/mens" exact component={Mens}/>
             <Route path="/womens" exact component={WomenShoes}/>
+            <Route path="/cart" exact component={Cart}/>
             <Route path="/product/:slug" exact component={Product}/>
         </Switch>
       </Router>

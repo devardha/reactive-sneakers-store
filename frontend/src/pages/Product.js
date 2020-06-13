@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Styled from '@emotion/styled'
 import Button from '../components/Button'
-import Spinner from '../components/Spinner';
+import Spinner from '../components/Spinner'
+import { connect } from 'react-redux'
+import { addItem } from '../redux/actions/addActions'
 
 const Product = (props)=> {
     let mounted = true;
 
     let [ data, setData ] = useState();
-    const [ loading, setLoading ] = useState(true)
+    const [ loading, setLoading ] = useState(true);
 
     // Get Slug Params
     const {slug} = props.match.params
@@ -15,7 +17,9 @@ const Product = (props)=> {
     useEffect(() => {
         async function fetchData(){
             if(mounted){
-                await fetch(`http://localhost:5000/api/products/${slug}`).then(res => res.json()).then(data => setData(data));
+                await fetch(`http://localhost:5000/api/products/${slug}`).then(res => res.json()).then(
+                        data => setData(data)
+                    );
                 setLoading(false)
             }
         }
@@ -23,7 +27,7 @@ const Product = (props)=> {
 
         // eslint-disable-next-line
         return () => mounted = false;
-    })
+    })    
 
     if(!loading){
         return(
@@ -43,7 +47,7 @@ const Product = (props)=> {
                                 <li><img src={data[0].photo} alt=""/></li>
                             </div>
                         </div>
-                        <Button>Add to Cart</Button>
+                        <Button onClick={() => props.addItemToCart({product_id: data[0]._id})}>Add to Cart</Button>
                     </div>
                 </div>
             </ProductStyled>
@@ -106,5 +110,13 @@ const ProductStyled = Styled.div`
         }
     }
 `
+const mapDispatchToProps = dispatch => ({
+    addItemToCart: cart => dispatch(addItem(cart)),
+});
 
-export default Product;
+
+const mapStateToProps = state => ({
+    cart: state.cart.cart
+})
+
+export default connect(mapStateToProps, mapDispatchToProps )(Product);
