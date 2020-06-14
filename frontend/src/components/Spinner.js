@@ -14,7 +14,7 @@ const Spinner = () => {
 const SpinnerStyled = Styled.div`
     .loader-container{
         display:flex;
-        justify-content:flex-start;
+        justify-content:center;
         padding-top:50px;
         align-items:center;
     }

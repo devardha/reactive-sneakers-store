@@ -15,12 +15,14 @@ import WomenShoes from './pages/WomenShoes';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Banner from './components/Banner'
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Provider store={store}>
     <div className="App">
       <Router>
+        <ScrollToTop>
         <div className="header">
           <Navbar/>
         </div>
@@ -32,7 +34,9 @@ function App() {
             <Route path="/cart" exact component={Cart}/>
             <Route path="/product/:slug" exact component={Product}/>
         </Switch>
+        </ScrollToTop>
       </Router>
+      
       <style>{`
       
       .header{

@@ -55,9 +55,11 @@ const Product = (props)=> {
         )
     }else{
         return(
+            <>
             <ProductStyled>
                 <Spinner/>
             </ProductStyled>
+            </>
         )
     }
 }
