@@ -6,5 +6,5 @@ import addReducer from './addReducer'
 export default combineReducers({
     posts: postReducer,
     sortby: sortReducer,
-    cart: addReducer,
+    cart: addReducer
 })

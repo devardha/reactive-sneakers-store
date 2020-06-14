@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { addItem } from '../redux/actions/addActions'
 
 const Product = (props)=> {
-    let mounted = true;
 
     let [ data, setData ] = useState();
     const [ loading, setLoading ] = useState(true);
@@ -15,18 +14,20 @@ const Product = (props)=> {
     const {slug} = props.match.params
 
     useEffect(() => {
+        let mounted = true;
+
         async function fetchData(){
-            if(mounted){
-                await fetch(`http://localhost:5000/api/products/${slug}`).then(res => res.json()).then(
-                        data => setData(data)
-                    );
+                await fetch(`http://localhost:5000/api/products/${slug}`).then(res => res.json()).then(data => {
+                    if(mounted){
+                        setData(data)
+                    }
+                });
                 setLoading(false)
-            }
         }
         fetchData();
-
-        // eslint-disable-next-line
+        
         return () => mounted = false;
+
     })    
 
     if(!loading){
@@ -47,7 +48,7 @@ const Product = (props)=> {
                                 <li><img src={data[0].photo} alt=""/></li>
                             </div>
                         </div>
-                        <Button onClick={() => props.addItemToCart({product_id: data[0]._id})}>Add to Cart</Button>
+                        <Button onClick={() => props.addItemToCart({product_id: data[0]._id, product_name: data[0].product_name, product_category: data[0].category[0] , item: 1, total_price: data[0].price, photo: data[0].photo})}>Add to Cart</Button>
                     </div>
                 </div>
             </ProductStyled>

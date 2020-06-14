@@ -16,6 +16,9 @@ const ButtonStyled = Styled.button`
 
     &:focus{
         outline:none;
+    }
+
+    &:active{
         background-color:#eee;
     }
 `

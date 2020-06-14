@@ -1,29 +1,35 @@
 import React from 'react'
 import Styled from '@emotion/styled'
+import { connect } from 'react-redux'
+import { updateQty } from '../redux/actions/updateQtyActions'
 
-const CartItem = ()=> {
+const CartItem = ({name, index, category, photo, price, updateQty, id})=> {
+
+    let total_price = price;
+    console.log(index)
+
     return(
         <CartItemStyled>
             <div className="item-image">
-                <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/b471b02a-767d-4ac0-bc96-c7a8c1f117e7/lebron-17-graffiti-basketball-shoe-DkNN8W.jpg" alt=""/>
+                <img src={photo} alt=""/>
             </div>
             <div className="item-details">
-                <h2>Lebron 17 'Graffiti'</h2>
-                <span className="item-price">$170</span>
-                <h3>Men's Shoe</h3>
+                <h2>{name}</h2>
+                <span className="item-price">${total_price.toString().slice(0, 5)}</span>
+                <h3>{category}</h3>
                 <div className="select">
                     Quantity
-                    <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
+                    <select onChange={(e) => updateQty({product_id: id, item: parseInt(e.target.value), total_price: parseInt(e.target.value * price), product_index: index})}>
+                        <option value="1" >1</option>
+                        <option value="2" >2</option>
+                        <option value="3" >3</option>
+                        <option value="4" >4</option>
+                        <option value="5" >5</option>
+                        <option value="6" >6</option>
+                        <option value="7" >7</option>
+                        <option value="8" >8</option>
+                        <option value="9" >9</option>
+                        <option value="10" >10</option>
                     </select>
                 </div>
             </div>
@@ -68,5 +74,14 @@ const CartItemStyled = Styled.div`
         }
     }
 `
+const mapDispatchToProps = dispatch => ({
+    updateQty: (product) => dispatch(updateQty(product))
+});
 
-export default CartItem;
+const mapStateToProps = (state => {
+    return {
+        cart: state.cart.cart,
+    };
+});
+
+export default connect(mapStateToProps, mapDispatchToProps )(CartItem);

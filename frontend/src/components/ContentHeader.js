@@ -101,6 +101,7 @@ const ContentHeaderStyled = Styled.div`
         margin-left:auto;
 
         &:focus{
+            background-color:#eee;
             .sort-menu{
                 display:block;
             }

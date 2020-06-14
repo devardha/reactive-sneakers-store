@@ -3,6 +3,7 @@ import Styled from '@emotion/styled'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../redux/actions/postActions'
 import { Link } from "react-router-dom";
+import Spinner from './Spinner';
 
 class ProductList extends Component{
 
@@ -12,8 +13,9 @@ class ProductList extends Component{
 
     render(){
 
-        const data = this.props.posts
-        const sortby = this.props.sortby
+        const data = this.props.posts;
+        const {sortby} = this.props;
+        const {gender} = this.props;
 
         function sortByPriceHigh( a, b ) {
             if ( a.price < b.price ){
@@ -65,8 +67,6 @@ class ProductList extends Component{
 
         const sorted = data.sort( sorting(sortby) );
 
-        const {gender} = this.props;
-
         // Filtering Men/Women
         function filtering(e){
             let result;
@@ -104,24 +104,31 @@ class ProductList extends Component{
         }
 
         return(
-            <ProductListStyled>
-                <ul className="grid-wrap">
-                    {
-                        filtering(gender).slice(0, limitItem(this.props.limit)).map((product, index) => {
-                            return(
-                                <li key={index}>
-                                    <img src={product.photo} alt="product"/>
-                                    <div className="product-details">
-                                        <Link to={`/product/${product.slug}`} className="product-name">{product.product_name}</Link>
-                                        <span className="product-category">{product.category[0]}</span>
-                                        <span className="product-price">${product.price}</span>
-                                    </div>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            </ProductListStyled>
+            <>
+            {
+                data.length
+                ?
+                <ProductListStyled>
+                    <ul className="grid-wrap">
+                        {
+                            filtering(gender).slice(0, limitItem(this.props.limit)).map((product, index) => {
+                                return(
+                                    <li key={index}>
+                                        <img src={product.photo} alt="product"/>
+                                        <div className="product-details">
+                                            <Link to={`/product/${product.slug}`} className="product-name">{product.product_name}</Link>
+                                            <span className="product-category">{product.category[0]}</span>
+                                            <span className="product-price">${product.price}</span>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </ProductListStyled>
+                : <Spinner/>
+            }
+            </>
         )
 
     }
