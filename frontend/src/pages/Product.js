@@ -68,7 +68,7 @@ const ProductStyled = Styled.div`
     .container{
         display:flex;
         padding:50px 48px;
-        min-height:100vh;
+        min-height:70vh;
         justify-content:center;
     }
 

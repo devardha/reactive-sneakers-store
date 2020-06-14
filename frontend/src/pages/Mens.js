@@ -19,7 +19,7 @@ const MensStyled = Styled.div`
         display:flex;
         flex-direction:column;
         padding:50px 48px;
-        min-height:100vh;
+        min-height:70vh;
     }
 `
 
