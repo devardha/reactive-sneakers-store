@@ -14,6 +14,7 @@ import store from './redux/store'
 import WomenShoes from './pages/WomenShoes';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
+import Banner from './components/Banner'
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
     <div className="App">
       <Router>
         <div className="header">
-                <Navbar/>  
+          <Navbar/>
         </div>
+        <Banner/>
         <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/mens" exact component={Mens}/>

@@ -3,10 +3,10 @@ import Styled from '@emotion/styled'
 import { connect } from 'react-redux'
 import { updateQty } from '../redux/actions/updateQtyActions'
 
-const CartItem = ({name, index, category, photo, price, updateQty, id})=> {
+const CartItem = ({name, index, category, photo, price, updateQty, id, cart})=> {
 
-    let total_price = price;
-    console.log(index)
+    const initialQty = cart[index].item
+    const initialPrice = price * initialQty;
 
     return(
         <CartItemStyled>
@@ -15,11 +15,11 @@ const CartItem = ({name, index, category, photo, price, updateQty, id})=> {
             </div>
             <div className="item-details">
                 <h2>{name}</h2>
-                <span className="item-price">${total_price.toString().slice(0, 5)}</span>
+                <span className="item-price">${initialPrice.toString().slice(0, 5)}</span>
                 <h3>{category}</h3>
                 <div className="select">
                     Quantity
-                    <select onChange={(e) => updateQty({product_id: id, item: parseInt(e.target.value), total_price: parseInt(e.target.value * price), product_index: index})}>
+                    <select onChange={(e) => updateQty({product_id: id, item: parseInt(e.target.value), product_index: index, total_price: parseInt(e.target.value*price)})}>
                         <option value="1" >1</option>
                         <option value="2" >2</option>
                         <option value="3" >3</option>

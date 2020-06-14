@@ -16,7 +16,8 @@ const BannerStyled = Styled.div`
     font-weight:300;
     height:50px;
     width:100%;
-    background-color: rgb(247, 247, 247);
+    background-color: #000;
+    color:#fff;
 `
 
 export default Banner;

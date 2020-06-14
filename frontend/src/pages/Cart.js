@@ -12,20 +12,12 @@ const Cart = ({cart}) => {
     function getPrice(item){
         return item.total_price
     }
-
-    // Finding the damn quantity of each item
-    function getItem(item){
-        return item.item
-    }
+    console.log(cart)
 
     // Calculation
     const foundPrice = cart.map(getPrice);
-
-    const foundQuantity = cart.map(getItem);
-    const totalQuantity = foundQuantity.reduce((a, b) => a + b, 0);
-
     const sumPrice = foundPrice.reduce((a, b) => a + b, 0);
-
+    
     const totalPrice = sumPrice + shippingCost + taxCost;
 
     return(
@@ -37,7 +29,7 @@ const Cart = ({cart}) => {
                         cart.length ?
                         cart.map((item, index) => {
                             return(
-                                <CartItem key={index} index={index} id={item.product_id} name={item.product_name} quantity={item.item} category={item.product_category} photo={item.photo} price={item.total_price}/>
+                                <CartItem key={index} index={index} id={item.product_id} name={item.product_name} quantity={item.item} category={item.product_category} photo={item.photo} price={item.default_price}/>
                             )
                         })
                         : <div>There are no items in your cart</div>
