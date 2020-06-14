@@ -20,16 +20,16 @@ const CartItem = ({name, index, category, photo, price, updateQty, id, cart})=> 
                 <div className="select">
                     Quantity
                     <select onChange={(e) => updateQty({product_id: id, item: parseInt(e.target.value), product_index: index, total_price: parseInt(e.target.value*price)})}>
-                        <option value="1" >1</option>
-                        <option value="2" >2</option>
-                        <option value="3" >3</option>
-                        <option value="4" >4</option>
-                        <option value="5" >5</option>
-                        <option value="6" >6</option>
-                        <option value="7" >7</option>
-                        <option value="8" >8</option>
-                        <option value="9" >9</option>
-                        <option value="10" >10</option>
+                        <option value="1" selected={ initialQty == 1 ? true: false } >1</option>
+                        <option value="2" selected={ initialQty == 2 ? true: false } >2</option>
+                        <option value="3" selected={ initialQty == 3 ? true: false } >3</option>
+                        <option value="4" selected={ initialQty == 4 ? true: false } >4</option>
+                        <option value="5" selected={ initialQty == 5 ? true: false } >5</option>
+                        <option value="6" selected={ initialQty == 6 ? true: false } >6</option>
+                        <option value="7" selected={ initialQty == 7 ? true: false } >7</option>
+                        <option value="8" selected={ initialQty == 8 ? true: false } >8</option>
+                        <option value="9" selected={ initialQty == 9 ? true: false } >9</option>
+                        <option value="10" selected={ initialQty == 10 ? true: false } >10</option>
                     </select>
                 </div>
             </div>
