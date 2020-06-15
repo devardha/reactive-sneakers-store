@@ -114,7 +114,7 @@ class ProductList extends Component{
                             filtering(gender).slice(0, limitItem(this.props.limit)).map((product, index) => {
                                 return(
                                     <li key={index}>
-                                        <img src={product.photo} alt="product"/>
+                                        <img src={product.photo[0]} alt="product"/>
                                         <div className="product-details">
                                             <Link to={`/product/${product.slug}`} className="product-name">{product.product_name}</Link>
                                             <span className="product-category">{product.category[0]}</span>

@@ -2,6 +2,7 @@ import React from 'react'
 import Styled from '@emotion/styled'
 import CartItem from '../components/CartItem'
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 
 const Cart = ({cart}) => {
 
@@ -22,6 +23,9 @@ const Cart = ({cart}) => {
 
     return(
         <CartStyled>
+            <Helmet>
+                <title>Cart - Reactive Sneaker Store</title>
+            </Helmet>
             <div className="container">
                 <div className="cart">
                     <h2>Cart</h2>

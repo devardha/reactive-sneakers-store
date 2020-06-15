@@ -3,10 +3,14 @@ import Styled from '@emotion/styled'
 import ProductList from '../components/ProductList'
 import ContentHeader from '../components/ContentHeader'
 import Hero from '../components/Hero'
+import { Helmet } from 'react-helmet'
 
 const Home = ()=> {
     return(
         <HomeStyled>
+            <Helmet>
+                <title>Reactive Sneaker Store</title>
+            </Helmet>
             <div className="container">
             <Hero/>
                 <ContentHeader gender={'MEN'} sort={false}/>

@@ -99,6 +99,12 @@ const ContentHeaderStyled = Styled.div`
     }
     .sort{
         margin-left:auto;
+        background-color:#f6f6f6;
+        color:#000;
+
+        &:hover{
+            background-color:#f6f6f6;
+        }
 
         &:focus{
             background-color:#eee;

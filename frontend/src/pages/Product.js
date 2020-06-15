@@ -4,11 +4,14 @@ import Button from '../components/Button'
 import Spinner from '../components/Spinner'
 import { connect } from 'react-redux'
 import { addItem } from '../redux/actions/addActions'
+import {Helmet} from 'react-helmet'
 
 const Product = (props)=> {
 
     let [ data, setData ] = useState();
     const [ loading, setLoading ] = useState(true);
+    const [ size, setSize ] = useState()
+    const [ imageIndex, setImageIndex ] = useState(0);
 
     // Get Slug Params
     const {slug} = props.match.params
@@ -29,26 +32,36 @@ const Product = (props)=> {
         return () => mounted = false;
 
     })    
-
     if(!loading){
         return(
             <ProductStyled>
+                <Helmet>
+                    <title>{data[0].product_name} - Reactive Sneaker Store</title>
+                </Helmet>
                 <div className="container">
                     <div className="product-image">
-                        <img src={data[0].photo} alt=""/>
+                        <img src={data[0].photo[imageIndex]} alt=""/>
                     </div>
                     <div className="product-details">
                         <div className="detail-header">
                             <h1 className="product-name">{data[0].product_name}</h1>
                             <h2 className="product-categories">{data[0].category[0]}</h2>
                             <div className="image-select">
-                                <li><img src={data[0].photo} alt=""/></li>
-                                <li><img src={data[0].photo} alt=""/></li>
-                                <li><img src={data[0].photo} alt=""/></li>
-                                <li><img src={data[0].photo} alt=""/></li>
+                                <li><img src={data[0].photo[0]} alt="product preview" onClick={() => setImageIndex(0)}/></li>
+                                <li><img src={data[0].photo[1]} alt="product preview" onClick={() => setImageIndex(1)}/></li>
+                                <li><img src={data[0].photo[2]} alt="product preview" onClick={() => setImageIndex(2)}/></li>
+                                <li><img src={data[0].photo[3]} alt="product preview" onClick={() => setImageIndex(3)}/></li>
+                            </div>
+                            <div className="size-select">
+                                <div className={`option ${size === 37 ? 'selected' : ''}`} onClick={() => setSize(37)}>EUR 37</div>
+                                <div className={`option ${size === 38 ? 'selected' : ''}`} onClick={() => setSize(38)}>EUR 38</div>
+                                <div className={`option ${size === 39 ? 'selected' : ''}`} onClick={() => setSize(39)}>EUR 39</div>
+                                <div className={`option ${size === 40 ? 'selected' : ''}`} onClick={() => setSize(40)}>EUR 40</div>
+                                <div className={`option ${size === 41 ? 'selected' : ''}`} onClick={() => setSize(41)}>EUR 41</div>
+                                <div className={`option ${size === 42 ? 'selected' : ''}`} onClick={() => setSize(42)}>EUR 42</div>
                             </div>
                         </div>
-                        <Button onClick={() => props.addItemToCart({product_id: data[0]._id, product_name: data[0].product_name, product_category: data[0].category[0] , item: 1, default_price: data[0].price, total_price: data[0].price, photo: data[0].photo})}>Add to Cart</Button>
+                        <Button disabled={ size ? false : true } onClick={() => props.addItemToCart({product_id: data[0]._id, product_name: data[0].product_name, product_category: data[0].category[0] , item: 1, default_price: data[0].price, total_price: data[0].price, photo: data[0].photo, size: size})}>Add to Cart</Button>
                     </div>
                 </div>
             </ProductStyled>
@@ -68,7 +81,7 @@ const ProductStyled = Styled.div`
     .container{
         display:flex;
         padding:50px 48px;
-        min-height:70vh;
+        min-height:100vh;
         justify-content:center;
     }
 
@@ -96,6 +109,30 @@ const ProductStyled = Styled.div`
                     height:100%;
                     object-fit:cover;
                 }
+            }
+        }
+        .size-select{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 7px;
+            margin-top:1rem;
+
+            .option{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:0.5rem 1rem;
+                border:1px solid #ddd;
+                font-size:1.2rem;
+                cursor:pointer;
+
+                &:hover{
+                    border-color:#000;
+                }
+            }
+            .selected{
+                background-color:#000;
+                color:#fff;
             }
         }
     }
