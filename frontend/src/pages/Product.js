@@ -53,12 +53,12 @@ const Product = (props)=> {
                                 <li><img src={data[0].photo[3]} alt="product preview" onClick={() => setImageIndex(3)}/></li>
                             </div>
                             <div className="size-select">
-                                <div className={`option ${size === 37 ? 'selected' : ''}`} onClick={() => setSize(37)}>EUR 37</div>
-                                <div className={`option ${size === 38 ? 'selected' : ''}`} onClick={() => setSize(38)}>EUR 38</div>
-                                <div className={`option ${size === 39 ? 'selected' : ''}`} onClick={() => setSize(39)}>EUR 39</div>
-                                <div className={`option ${size === 40 ? 'selected' : ''}`} onClick={() => setSize(40)}>EUR 40</div>
-                                <div className={`option ${size === 41 ? 'selected' : ''}`} onClick={() => setSize(41)}>EUR 41</div>
-                                <div className={`option ${size === 42 ? 'selected' : ''}`} onClick={() => setSize(42)}>EUR 42</div>
+                                <div className={`option ${size === 37 ? 'selected' : ''} ${data[0].available_size.includes(37) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(37) ? () => setSize(37) : {} }>EUR 37</div>
+                                <div className={`option ${size === 38 ? 'selected' : ''} ${data[0].available_size.includes(38) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(38) ? () => setSize(38) : {} }>EUR 38</div>
+                                <div className={`option ${size === 39 ? 'selected' : ''} ${data[0].available_size.includes(39) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(39) ? () => setSize(39) : {} }>EUR 39</div>
+                                <div className={`option ${size === 40 ? 'selected' : ''} ${data[0].available_size.includes(40) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(40) ? () => setSize(40) : {} }>EUR 40</div>
+                                <div className={`option ${size === 41 ? 'selected' : ''} ${data[0].available_size.includes(41) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(41) ? () => setSize(41) : {} }>EUR 41</div>
+                                <div className={`option ${size === 42 ? 'selected' : ''} ${data[0].available_size.includes(42) ? '' : 'disabled'}`} onClick={ data[0].available_size.includes(42) ? () => setSize(42) : {} }>EUR 42</div>
                             </div>
                         </div>
                         <Button disabled={ size ? false : true } onClick={() => props.addItemToCart({product_id: data[0]._id, product_name: data[0].product_name, product_category: data[0].category[0] , item: 1, default_price: data[0].price, total_price: data[0].price, photo: data[0].photo, size: size})}>Add to Cart</Button>
@@ -125,9 +125,20 @@ const ProductStyled = Styled.div`
                 border:1px solid #ddd;
                 font-size:1.2rem;
                 cursor:pointer;
+                user-select:none;
 
                 &:hover{
                     border-color:#000;
+                }
+            }
+            .disabled{
+                background-color:#f6f6f6;
+                color:#999;
+                cursor:unset;
+
+                &:hover{
+                    border-color:#f6f6f6;
+                    border:1px solid #ddd;
                 }
             }
             .selected{

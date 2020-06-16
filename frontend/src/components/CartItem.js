@@ -11,7 +11,7 @@ const CartItem = ({name, index, category, photo, price, updateQty, id, cart})=> 
     return(
         <CartItemStyled>
             <div className="item-image">
-                <img src={photo} alt=""/>
+                <img src={photo[0]} alt=""/>
             </div>
             <div className="item-details">
                 <h2>{name}</h2>

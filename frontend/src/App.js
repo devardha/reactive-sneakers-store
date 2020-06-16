@@ -2,20 +2,17 @@ import React from 'react';
 import './App.scss'
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-
-//Page Component
-  import Home from './pages/Home'
-import Mens from './pages/Mens'
-
-//Shared Component
-import Navbar from './components/Navbar'
-
+import { PublicRoute, LoginRoute } from './HOC/CustomRoutes'
 import store from './redux/store'
+import ScrollToTop from './components/ScrollToTop';
+
+//Page Level Component
+import Home from './pages/Home'
+import Mens from './pages/Mens'
 import WomenShoes from './pages/WomenShoes';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
-import Banner from './components/Banner'
-import ScrollToTop from './components/ScrollToTop';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -23,29 +20,16 @@ function App() {
     <div className="App">
       <Router>
         <ScrollToTop>
-        <div className="header">
-          <Navbar/>
-        </div>
-        <Banner/>
         <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/mens" exact component={Mens}/>
-            <Route path="/womens" exact component={WomenShoes}/>
-            <Route path="/cart" exact component={Cart}/>
-            <Route path="/product/:slug" exact component={Product}/>
+            <PublicRoute path="/" exact component={Home}/>
+            <PublicRoute path="/mens" exact component={Mens}/>
+            <PublicRoute path="/womens" exact component={WomenShoes}/>
+            <PublicRoute path="/cart" exact component={Cart}/>
+            <PublicRoute path="/product/:slug" exact component={Product}/>
+            <LoginRoute path="/login" exact component={Login}/>
         </Switch>
         </ScrollToTop>
       </Router>
-      
-      <style>{`
-      
-      .header{
-        position:sticky;
-        top:0;
-        z-index:2;
-      }
-  
-      `}</style>
     </div>
     </Provider>
   );
