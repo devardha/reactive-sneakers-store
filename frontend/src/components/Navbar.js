@@ -2,9 +2,25 @@ import React from 'react'
 import Styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import {  ShoppingCart } from 'react-feather'
+import { logout } from '../redux/actions/authActions'
 import { connect } from 'react-redux'
 
-const Navbar = ({cart})=> {
+const Navbar = ({cart, user, logout})=> {
+
+    const isAuthenticated = user.isAuthenticated;
+
+    const authNav = (
+        <>
+            <Link to="/" onClick={() => logout()}><li>Logout</li></Link>
+        </>
+    )
+
+    const guessNav = (
+        <>
+            <Link to="/login"><li>Login</li></Link>
+            <Link to="/signup"><li>Signup</li></Link>
+        </>
+    )
 
     return(
         <>
@@ -16,7 +32,7 @@ const Navbar = ({cart})=> {
                 <Link to="/"><li>Home</li></Link>
                 <Link to="/mens"><li>Mens</li></Link>
                 <Link to="/womens"><li>Womens</li></Link>
-                <Link to="/"><li>Outwear</li></Link>
+                <a href="https://github.com/dev-ardha/reactive-sneaker-store"><li>GitHub</li></a>
                 <Link to="/"><li>Blog</li></Link>
             </ul>
             <div className="nav-right">
@@ -30,8 +46,7 @@ const Navbar = ({cart})=> {
                     }
                     </Link>
                 </div>
-                <Link to="/login"><li>Login</li></Link>
-                <li>Signup</li>
+                { isAuthenticated ? authNav : guessNav }
             </div>
         </NavbarStyled>
         </>
@@ -149,7 +164,12 @@ const NavbarStyled = Styled.header`
 `
 
 const mapStateToProps = state => ({
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    user: state.account
 })
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => ({
+    logout: (e) => dispatch(logout(e))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

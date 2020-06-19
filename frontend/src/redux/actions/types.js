@@ -1,6 +1,22 @@
 export const FETCH_POSTS = 'FETCH_POSTS'
+
 export const SORTBY_PRICE_LOW = 'SORTBY_PRICE_LOW'
 export const SORTBY_PRICE_HIGH = 'SORTBY_PRICE_HIGH'
 export const SORTBY_LATEST = 'SORTBY_LATEST'
+
 export const ADD_ITEM = 'ADD_ITEM'
 export const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const SIGNUP_SUCCESS = 'SIGNIN_SUCCESS'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+
+export const LOGIN_FAILED = 'LOGIN_FAILED'
+export const SIGNUP_FAILED = 'SIGNUP_FAILED'
+
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const GET_ERROR = 'GET_ERROR'
+export const CLEAR_ERROR = 'CLEAR_ERROR'
+
+export const USER_LOADED = 'USER_LOADED'
+export const USER_LOADING = 'USER_LOADING'

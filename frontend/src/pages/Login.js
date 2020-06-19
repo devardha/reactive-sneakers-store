@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import Styled from '@emotion/styled'
 import Button from '../components/Button'
-import {Link} from 'react-router-dom'
-import axios from 'axios'
+import {Link, useHistory} from 'react-router-dom'
+import { loginUser } from '../redux/actions/authActions'
+import {connect} from 'react-redux'
 
-
-const Login = () => {
+const Login = ({login}) => {
 
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const history = useHistory()
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -18,8 +19,8 @@ const Login = () => {
             password: password
         }
 
-        axios.post('http://localhost:5000/api/auth', user)
-            .then(res => console.log(res.data));
+        login(user);
+        history.push('/')
 
     }
 
@@ -55,4 +56,8 @@ const LoginStyled = Styled.div`
 
 `
 
-export default Login
+const mapDispatchToProps = dispatch => ({
+    login: (e) => dispatch(loginUser(e))
+});
+
+export default connect(null, mapDispatchToProps )(Login);

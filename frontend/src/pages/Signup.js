@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import Styled from '@emotion/styled'
 import Button from '../components/Button'
-import {Link} from 'react-router-dom'
-import axios from 'axios'
+import {Link, useHistory} from 'react-router-dom'
+import { registerUser } from '../redux/actions/authActions'
+import {connect} from 'react-redux'
 
-const Signup = ()=> {
+const Signup = ({register}) => {
 
     const [ firstname, setFirstname ] = useState('')
     const [ lastname, setLastname ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
+    const history = useHistory();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -21,10 +23,17 @@ const Signup = ()=> {
             password: password
         }
 
-        axios.post('http://localhost:5000/api/user/add', user)
-            .then(res => console.log(res.data));
+        register(user);
+        history.push('/')
 
     }
+
+    console.log({
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password
+    })
 
     return(
         <SignupStyled>
@@ -47,7 +56,7 @@ const Signup = ()=> {
                         <label htmlFor="password">Password</label>
                         <input name="password" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                     </div>
-                    <Button className="btn">Login</Button>
+                    <Button className="btn" >Login</Button>
                     <span>Already have account? Login <Link to="/login">here</Link></span>
                 </form>
             </div>
@@ -65,4 +74,8 @@ const SignupStyled = Styled.div`
     position:relative;
 `
 
-export default Signup;
+const mapDispatchToProps = dispatch => ({
+    register: (e) => dispatch(registerUser(e))
+});
+
+export default connect(null, mapDispatchToProps )(Signup);
