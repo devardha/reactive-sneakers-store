@@ -16,8 +16,12 @@ app.use(bodyparser.json());
 
 // Routes
 const productsRouter = require('./routes/products');
+const userRouter = require('./routes/user');
+const authRoutes = require('./routes/auth');
 
 app.use('/api/products', productsRouter);
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 

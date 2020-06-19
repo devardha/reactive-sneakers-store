@@ -1,15 +1,16 @@
 const router = require('express').Router();
 const Product = require('../models/product.model');
+const auth = require('../middleware/auth')
 
 // Get All Products
-router.route('/').get((req, res) => {
+router.get('/', (req, res) => {
     Product.find()
         .then(products => res.json(products))
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
 // Get Men Soes Product
-router.route('/menshoes').get((req, res) => {
+router.get('/', (req, res) => {
     Product.find({ category: "Men" })
         .then(products => res.json(products))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -17,7 +18,7 @@ router.route('/menshoes').get((req, res) => {
 
 
 // Get Women Shoes Product
-router.route('/womenshoes').get((req, res) => {
+router.get('/womenshoes', (req, res) => {
     Product.find({ category: "Women" })
         .then(products => res.json(products))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -25,7 +26,7 @@ router.route('/womenshoes').get((req, res) => {
 
 
 // Add Product
-router.route('/add').post((req, res)=>{
+router.post('/add', auth, (req, res)=>{
     const product_name = req.body.product_name;
     const category = req.body.category;
     const price = req.body.price;

@@ -4,9 +4,10 @@ import Button from '../components/Button'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
+const Signup = ()=> {
 
-const Login = () => {
-
+    const [ firstname, setFirstname ] = useState('')
+    const [ lastname, setLastname ] = useState('')
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
 
@@ -14,20 +15,30 @@ const Login = () => {
         e.preventDefault();
 
         const user = {
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             password: password
         }
 
-        axios.post('http://localhost:5000/api/auth', user)
+        axios.post('http://localhost:5000/api/user/add', user)
             .then(res => console.log(res.data));
 
     }
 
     return(
-        <LoginStyled>
-            <div className="login">
+        <SignupStyled>
+            <div className="signup">
                 <form className="user-form" onSubmit={onSubmit}>
-                    <h2>Login</h2>
+                    <h2>Signup</h2>
+                    <div className="field">
+                        <label htmlFor="email">First Name</label>
+                        <input name="firstname" type="firstname" placeholder="First Name" onChange={(e) => setFirstname(e.target.value)} value={firstname}/>
+                    </div>
+                    <div className="field">
+                        <label htmlFor="lastname">Last Name</label>
+                        <input name="lastname" type="lastname" placeholder="Last Name" onChange={(e) => setLastname(e.target.value)} value={lastname}/>
+                    </div>
                     <div className="field">
                         <label htmlFor="email">Email</label>
                         <input name="email" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email}/>
@@ -37,14 +48,14 @@ const Login = () => {
                         <input name="password" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                     </div>
                     <Button className="btn">Login</Button>
-                    <span>Don't have account? Signup <Link to="/signup">here</Link></span>
+                    <span>Already have account? Login <Link to="/login">here</Link></span>
                 </form>
             </div>
-        </LoginStyled>
+        </SignupStyled>
     )
 }
 
-const LoginStyled = Styled.div`
+const SignupStyled = Styled.div`
     display:flex;
     width:100%;
     height:100vh;
@@ -52,7 +63,6 @@ const LoginStyled = Styled.div`
     justify-content:center;
     align-items:center;
     position:relative;
-
 `
 
-export default Login
+export default Signup;

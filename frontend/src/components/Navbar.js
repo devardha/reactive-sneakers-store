@@ -30,7 +30,7 @@ const Navbar = ({cart})=> {
                     }
                     </Link>
                 </div>
-                <li>Login</li>
+                <Link to="/login"><li>Login</li></Link>
                 <li>Signup</li>
             </div>
         </NavbarStyled>

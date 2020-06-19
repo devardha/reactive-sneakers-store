@@ -11,7 +11,7 @@ const Home = ()=> {
             <Helmet>
                 <title>Reactive Sneaker Store</title>
             </Helmet>
-            <div className="container">
+            <div className="container"> 
             <Hero/>
                 <ContentHeader gender={'MEN'} sort={false}/>
                 <ProductList gender={'MEN'} limit={true}/>
