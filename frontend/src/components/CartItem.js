@@ -1,9 +1,11 @@
 import React from 'react'
 import Styled from '@emotion/styled'
 import { connect } from 'react-redux'
+import Button from './Button'
 import { updateQty } from '../redux/actions/updateQtyActions'
+import { removeItem } from '../redux/actions/removeActions'
 
-const CartItem = ({name, index, category, photo, price, updateQty, id, cart})=> {
+const CartItem = ({name, index, category, photo, price, updateQty, removeItem, id, cart})=> {
 
     const initialQty = cart[index].item
     const initialPrice = price * initialQty;
@@ -32,6 +34,7 @@ const CartItem = ({name, index, category, photo, price, updateQty, id, cart})=> 
                         <option value="10" selected={ initialQty === 10 ? true: false } >10</option>
                     </select>
                 </div>
+                <Button className="checkout-btn" onClick={() => removeItem(index)}>Remove Item</Button>
             </div>
         </CartItemStyled>
     )
@@ -43,6 +46,12 @@ const CartItemStyled = Styled.div`
     margin-bottom:2rem;
     border-bottom:1px solid #eee;
 
+    .checkout-btn{
+        padding: .5rem 1rem;
+        font-size: .8rem;
+        position: absolute;
+        bottom: 3px;
+    }
     .item-image{
         width:200px;
         margin-right:2rem;
@@ -75,7 +84,8 @@ const CartItemStyled = Styled.div`
     }
 `
 const mapDispatchToProps = dispatch => ({
-    updateQty: (product) => dispatch(updateQty(product))
+    updateQty: (product) => dispatch(updateQty(product)),
+    removeItem: (content) => dispatch(removeItem(content))
 });
 
 const mapStateToProps = (state => {

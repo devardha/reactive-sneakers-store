@@ -1,4 +1,4 @@
-import { ADD_ITEM, UPDATE_QUANTITY } from '../actions/types'
+import { ADD_ITEM, REMOVE_ITEM, UPDATE_QUANTITY } from '../actions/types'
 import update from 'immutability-helper';
 
 const initialState = {
@@ -11,6 +11,11 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 cart: [...state.cart, action.payload]
+            }
+        case REMOVE_ITEM:
+            return {
+                ...state,
+                cart: [...state.cart.filter((item, index) => index !== action.payload)]
             }
         case UPDATE_QUANTITY:
             return update(state, { 

@@ -5,6 +5,7 @@ export const SORTBY_PRICE_HIGH = 'SORTBY_PRICE_HIGH'
 export const SORTBY_LATEST = 'SORTBY_LATEST'
 
 export const ADD_ITEM = 'ADD_ITEM'
+export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
